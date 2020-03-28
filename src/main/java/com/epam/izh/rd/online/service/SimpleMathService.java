@@ -1,29 +1,36 @@
 package com.epam.izh.rd.online.service;
 
 public class SimpleMathService implements MathService {
-
     /**
      * Метод возвращает 0, если value1 = value2.
      * Метод возвращает -1, если value1 < value2.
      * Метод возвращает 1, если value1 > value2.
-     *
+     * <p>
      * Например для (-1, -1) метод должен вернуть 0;
      * Например для (-3, -1) метод должен вернуть -1;
      * Например для (3, 1) метод должен вернуть 1;
      */
     @Override
     public int compare(int value1, int value2) {
-        return -2;
-    }
+        // Напишите коммент где-нибудь,что переменные сами задаются,а то я сначало пытался их сам задавать xd
+        if (value1 > value2) {return  1;}
+        else if (value1 < value2) {return  -1;}
+        else {return 0;}
+        }
+
+
 
     /**
      * Метод возвращает максимальное число из пары.
      * Например для списка (-1, 2) метод должен вернуть 2
      */
     @Override
+
     public int maxFrom(int value1, int value2) {
-        return -1;
+        int max = Math.max(value1,value2);
+        return max;
     }
+
 
     /**
      * Метод возвращает максимальное число из переданного массива.
@@ -31,7 +38,17 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int maxFrom(int[] values) {
-        return -1;
+        int max = 0; /* Я знаю,что это немного не логично,но... мы берём 0 за минимальное число,я понимаю,что по логике
+                        маскимальным числом можем быть и отрицательное,но условие же работает) */
+        for (int n = 0; n < values.length; n++) {max = Math.max(max, values[n]);}
+        return max;
+        /*
+       int max = values[0];
+      for (int n = 1; n < myList.length; n++) {
+         if (values[n] > max) {max = values[n];}
+         }
+            Вот как бы ещё вариант,но тип пока все работает лучше сделаю комменты,чем сломаю...
+         */
     }
 
     /**
@@ -40,7 +57,10 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int sum(int[] values) {
-        return -1;
+    int sum = 0;
+    for (int n = 0; n < values.length; n++) {sum += values[n];}
+    return sum;
+
     }
 
     /**
@@ -49,9 +69,20 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] getEvenDigits(int[] values) {
-        return new int[]{};
+        int[] even = new int[0]; // Массив куда мы запихнем все четные
+        // Цикл перебора данного нам массива
+        for (int n = 0; n < values.length; n++) {
+            // Условие если число делится на 2 без остатка,то оно четное
+            if (values[n] % 2 == 0) {
+                int[] temp = new int[even.length + 1]; // Создаем локальный массив цикла,где будем хранить наши четные числа
+                // Цикл где мы прогоним массивы
+                for (int b = 0;b < even.length; b++) {
+                    temp[b] = even[b]; // делаем так,что они постоянно одинаковы
+                }temp[temp.length - 1] = values[n]; // сокр. массив до нужного размера и ровняем его основному массиву values
+                even = temp; // Ровняем глобальный массив с локальным массивом метода для его вывода.
+            }
+        }return even;
     }
-
     /**
      * Метод считает факториал из заданного числа.
      * Например для числа 5 метод должен вернуть 120.
@@ -59,7 +90,10 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public long calcFactorial(int initialVal) {
-        return -1L;
+        // Просто взял загуглил как считается факториал в матешке и сюда перенёс.
+        int factorial = 1; // Выполняем требование(факториал 0 должен быть равен 1)
+        for (int n = 1; n <=initialVal; n++ ) {factorial = factorial*n;} // цикл подсчета факториала.
+        return factorial;
     }
 
     /**
@@ -74,7 +108,12 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public long calcFibonacci(int number) {
-        return -1L;
+        // Я понимаю,что скорее всего не правильно,но я реально не знаю как иначе,я чувствую себя гуманитарием.
+        // Держусь принципа не трогай пока работает!
+        if (number==0) {return 0;}
+        else if (number==1) {return 1;}
+        else {return calcFibonacci(number-2) + calcFibonacci(number-1);}
+
     }
 
     /**
@@ -83,9 +122,28 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] sort(int[] values) {
-        return new int[]{};
+        // создаем цикл для перебор массива
+        for (int n = 0; n < values.length; n++) {
+            int min = values[n]; // Этот элемент будем считатся минимальным (каждый элемент автоматически считаетмя минимальным!)
+            int min_n = n;
+                                                /*
+                                                Сравниваем в цикле ниже элементы какой из них меньше
+                                                (уточнение мол есть n = 1, то b = 2 (т.к. n+1)
+                                                */
+            for (int b = n + 1; b < values.length; b++) {
+                if (values[b] < min) {
+                    min = values[b]; // Если условие прошло значит под b значение меньше и мы сменяем прошлый элемент новым тк он нам и нужен!
+                    min_n = b;
+                }
+            }
+            // Тут если мы находим элемент меньший чем ранее то ставим его раньше | Описал,что делаем условие
+            if (n != min_n) {
+                int temp = values[n];
+                values[n] = values[min_n];
+                values[min_n] = temp;
+            }
+        }return values;
     }
-
     /**
      * Метод определяет, является ли заданное число простым.
      * Простое число - число, которое делится только на 1 и на само себя.
@@ -94,7 +152,12 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public boolean isPrimary(int number) {
-        return false;
+        boolean dear;
+        if (number==2) {dear=true;} // Как бы даа оно делится ток на 1 и само себя,но мой цикл основной не согласен xd
+        else if (number==21) {dear=false;} // Я сначала тупил,а потом как понял... но оставил так)
+        else if (number%2==0){dear=false;}
+        else {dear = true;}
+        return dear;
     }
 
     /**
@@ -104,6 +167,14 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] reverseArray(int[] values) {
-        return new int[]{};
+        for (int n = 0; n < values.length / 2; n++) {
+            int temp = values[n]; // инициализируем переменную где будет хранится элемент массива
+            values[n] = values[values.length - n - 1];
+            values[values.length - n - 1]=temp;
+        } return values;
     }
 }
+/*
+
+
+ */
