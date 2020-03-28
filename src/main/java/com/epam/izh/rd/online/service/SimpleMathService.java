@@ -124,19 +124,15 @@ public class SimpleMathService implements MathService {
     public int[] sort(int[] values) {
         // создаем цикл для перебор массива
         for (int n = 0; n < values.length; n++) {
-            int min = values[n]; // Этот элемент будем считатся минимальным (каждый элемент автоматически считаетмя минимальным!)
-            int min_n = n;
-                                                /*
-                                                Сравниваем в цикле ниже элементы какой из них меньше
-                                                (уточнение мол есть n = 1, то b = 2 (т.к. n+1)
-                                                */
+            int min = values[n]; 
+            int min_n = n;                         
             for (int b = n + 1; b < values.length; b++) {
                 if (values[b] < min) {
-                    min = values[b]; // Если условие прошло значит под b значение меньше и мы сменяем прошлый элемент новым тк он нам и нужен!
+                    min = values[b]; 
                     min_n = b;
                 }
             }
-            // Тут если мы находим элемент меньший чем ранее то ставим его раньше | Описал,что делаем условие
+           
             if (n != min_n) {
                 int temp = values[n];
                 values[n] = values[min_n];
@@ -168,7 +164,7 @@ public class SimpleMathService implements MathService {
     @Override
     public int[] reverseArray(int[] values) {
         for (int n = 0; n < values.length / 2; n++) {
-            int temp = values[n]; // инициализируем переменную где будет хранится элемент массива
+            int temp = values[n];
             values[n] = values[values.length - n - 1];
             values[values.length - n - 1]=temp;
         } return values;
