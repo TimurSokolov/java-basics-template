@@ -69,17 +69,15 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] getEvenDigits(int[] values) {
-        int[] even = new int[0]; // Массив куда мы запихнем все четные
-        // Цикл перебора данного нам массива
+        int[] even = new int[0];
         for (int n = 0; n < values.length; n++) {
-            // Условие если число делится на 2 без остатка,то оно четное
+
             if (values[n] % 2 == 0) {
-                int[] temp = new int[even.length + 1]; // Создаем локальный массив цикла,где будем хранить наши четные числа
-                // Цикл где мы прогоним массивы
+                int[] temp = new int[even.length + 1]; 
                 for (int b = 0;b < even.length; b++) {
-                    temp[b] = even[b]; // делаем так,что они постоянно одинаковы
-                }temp[temp.length - 1] = values[n]; // сокр. массив до нужного размера и ровняем его основному массиву values
-                even = temp; // Ровняем глобальный массив с локальным массивом метода для его вывода.
+                    temp[b] = even[b];
+                }temp[temp.length - 1] = values[n]; 
+                even = temp; 
             }
         }return even;
     }
@@ -90,7 +88,6 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public long calcFactorial(int initialVal) {
-        // Просто взял загуглил как считается факториал в матешке и сюда перенёс.
         int factorial = 1; // Выполняем требование(факториал 0 должен быть равен 1)
         for (int n = 1; n <=initialVal; n++ ) {factorial = factorial*n;} // цикл подсчета факториала.
         return factorial;
