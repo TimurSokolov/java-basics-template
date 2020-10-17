@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,6 +27,9 @@ public class MathServiceTest {
     @DisplayName("Тест метода MathService.compare(int value1, int value2)")
     void testCompare(int value1, int value2, int expected) {
         assertEquals(expected, mathService.compare(value1, value2), "Для входных параметров: " + value1 + " " + value2);
+
+
+
     }
 
     @Test
