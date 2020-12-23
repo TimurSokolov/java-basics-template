@@ -59,9 +59,10 @@ public class SimpleMathService implements MathService {
      * Метод фильтрует массив, оставляя только четные числа.
      * Например для списка {-1, -3, 4, 8, 5, 22, 17} метод должен вернуть {4, 8, 22}
      */
+    
     @Override
     public int[] getEvenDigits(int[] values) {
-        int[] x;
+        int[] evenDigitsArray;
         int check = 0, z = 0, i;
         for (i = 0;i < values.length; i++) {
             if (values[i] % 2 == 0) {
@@ -69,17 +70,17 @@ public class SimpleMathService implements MathService {
             }
         }
 
-        x = new int[check];
+        evenDigitsArray = new int[check];
 
         for (i = 0;i < values.length; i++) {
             if (values[i] % 2 == 0) {
-                x[z] = values[i];
+                evenDigitsArray[z] = values[i];
                 z++;
             }
         }
-        return x;
+        return evenDigitsArray;
     }
-
+    
     /**
      * Метод считает факториал из заданного числа.
      * Например для числа 5 метод должен вернуть 120.
